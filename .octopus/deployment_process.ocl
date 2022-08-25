@@ -1,0 +1,27 @@
+step "deploy-an-azure-app-service" {
+    name = "Deploy an Azure App Service"
+    properties = {
+        Octopus.Action.TargetRoles = "geoffb-web-app-role"
+    }
+
+    action {
+        action_type = "Octopus.AzureAppService"
+        properties = {
+            Octopus.Action.Azure.DeploymentType = "Container"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "docker-hub"
+            Octopus.Action.Package.PackageId = "nginx"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "NotAcquired"
+            feed = "docker-hub"
+            package_id = "nginx"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
