@@ -1,0 +1,7 @@
+variable "Octopus.Azure.Account" {
+    type = "AzureAccount"
+
+    value "geoff-b-test-azure-account" {
+        description = ""
+    }
+}
